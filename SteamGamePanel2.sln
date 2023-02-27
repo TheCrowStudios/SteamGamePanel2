@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamGamePanelUI", "SteamGamePanel2\SteamGamePanelUI.csproj", "{7E3821E8-9F00-442A-8E5A-08D3A7A89F2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamGamePanelLibrary", "SteamGamePanelLibrary\SteamGamePanelLibrary.csproj", "{FDA45296-4E29-4019-9A56-A0280EF59627}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E3821E8-9F00-442A-8E5A-08D3A7A89F2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E3821E8-9F00-442A-8E5A-08D3A7A89F2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E3821E8-9F00-442A-8E5A-08D3A7A89F2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E3821E8-9F00-442A-8E5A-08D3A7A89F2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDA45296-4E29-4019-9A56-A0280EF59627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA45296-4E29-4019-9A56-A0280EF59627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA45296-4E29-4019-9A56-A0280EF59627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDA45296-4E29-4019-9A56-A0280EF59627}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {08F212EE-B57D-453C-B7C1-CF33D9BFC507}
+	EndGlobalSection
+EndGlobal
