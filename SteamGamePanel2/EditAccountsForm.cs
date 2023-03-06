@@ -25,6 +25,7 @@ namespace SteamGamePanelUI
         {
             notifyLabel.Text = "";
             UpdateUserList();
+            Themes.SetFormTheme(this);
         }
 
         private void addUserButton_Click(object sender, EventArgs e)
@@ -59,10 +60,10 @@ namespace SteamGamePanelUI
 
             ListView.SelectedListViewItemCollection selectedListViewItemCollection = accountsList.SelectedItems;
             
-            for (int i = 0; i < selectedListViewItemCollection.Count; i++)
+            for (int i = 0; i < accountsList.SelectedItems.Count; i++)
             {
-                Config.RemoveSteamUser(selectedListViewItemCollection[i].Text);
-                accountsList.Items.RemoveAt(i);
+                Config.RemoveSteamUser(accountsList.SelectedItems[i].Text);
+                accountsList.Items.Remove(accountsList.SelectedItems[i]);
             }
         }
     }

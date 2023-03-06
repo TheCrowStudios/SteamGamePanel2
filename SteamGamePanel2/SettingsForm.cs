@@ -22,9 +22,12 @@ namespace SteamGamePanelUI
             Config = _configuration;
         }
 
+        // TODO - Add tooltips.
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             steamPathText.Text = Config.SteamPath;
+            inventoryRequestTimeText.Text = Config.TimeBetweenInventoryRequest.ToString();
+            scanUserInventoryCheck.Checked = Config.ScanUserInventory;
             sandboxiePathText.Text = Config.SandboxiePath;
             sandboxieConfigurationPathText.Text = Config.SandboxieConfigurationPath;
             gameIDText.Text = Config.GameID;
@@ -36,6 +39,7 @@ namespace SteamGamePanelUI
             monitorHeightText.Text = Config.ScreenHeight.ToString();
             maFilesPathText.Text = Config.MaFilesPath;
             UpdateColors();
+            Themes.SetFormTheme(this);
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -43,6 +47,9 @@ namespace SteamGamePanelUI
             int value;
 
             Config.SteamPath = steamPathText.Text;
+            if (int.TryParse(inventoryRequestTimeText.Text, out value)) Config.TimeBetweenInventoryRequest = value;
+            else inventoryRequestTimeLabel.ForeColor = Color.Red;
+            Config.ScanUserInventory = scanUserInventoryCheck.Checked;
             Config.SandboxiePath = sandboxiePathText.Text;
             Config.SandboxieConfigurationPath = sandboxieConfigurationPathText.Text;
             Config.GameID = gameIDText.Text;
@@ -71,6 +78,7 @@ namespace SteamGamePanelUI
         {
             int value;
 
+            inventoryRequestTimeLabel.ForeColor = ForeColor;
             gameIDLabel.ForeColor = ForeColor;
             gameWidthLabel.ForeColor = ForeColor;
             gameHeightLabel.ForeColor = ForeColor;
@@ -81,6 +89,7 @@ namespace SteamGamePanelUI
             sandboxieConfigurationPathLabel.ForeColor = ForeColor;
             maFilesPathLabel.ForeColor = ForeColor;
 
+            if (!int.TryParse(inventoryRequestTimeText.Text, out value)) inventoryRequestTimeLabel.ForeColor = Color.Red;
             if (!File.Exists(steamPathText.Text)) steamPathLabel.ForeColor = Color.Red;
             if (!File.Exists(sandboxiePathText.Text) && sandboxiePathText.Text != "") sandboxiePathLabel.ForeColor = Color.Red;
             if (!File.Exists(sandboxieConfigurationPathText.Text) && sandboxieConfigurationPathText.Text != "") sandboxieConfigurationPathLabel.ForeColor = Color.Red;

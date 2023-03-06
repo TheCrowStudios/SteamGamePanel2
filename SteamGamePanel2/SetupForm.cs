@@ -23,7 +23,7 @@ namespace SteamGamePanelUI
 
         private void SetupForm_Load(object sender, EventArgs e)
         {
-
+            Themes.SetFormTheme(this);
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
@@ -34,6 +34,12 @@ namespace SteamGamePanelUI
             EditAccountsForm accountsForm = new EditAccountsForm(Config);
             accountsForm.ShowDialog();
             Close();
+        }
+
+        private void donateLabel_Click(object sender, EventArgs e)
+        {
+            DonateForm form = new DonateForm();
+            form.Show();
         }
     }
 }

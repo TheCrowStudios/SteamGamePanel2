@@ -47,6 +47,8 @@ namespace SteamGamePanelLibrary
         public int ScreenHeight { get; set; } = 720;
         public int GameWindowWidth { get; set; } = 320;
         public int GameWindowHeight { get; set; } = 240;
+        public int TimeBetweenInventoryRequest { get; set; } = 60000;
+        public bool ScanUserInventory { get; set; } = true;
         /// <summary>
         /// The loaded steam accounts from the file.
         /// </summary>
@@ -127,7 +129,7 @@ namespace SteamGamePanelLibrary
             }
             
             SteamUsers.Add(new SteamUserModel(_username, _password));
-            Sandboxie.CreateBox(_username, SandboxieConfigurationPath);
+            Sandboxie.CreateBox(_username, SandboxiePath, SandboxieConfigurationPath);
             ScanMaFilesAndUpdateUsers();
             SaveConfig();
             return true;

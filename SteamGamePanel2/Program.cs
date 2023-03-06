@@ -1,3 +1,5 @@
+using SteamGamePanelUI;
+
 namespace SteamGamePanel2
 {
     internal static class Program

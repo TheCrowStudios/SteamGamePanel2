@@ -32,6 +32,7 @@
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.setupLabel = new System.Windows.Forms.Label();
             this.settingsButton = new System.Windows.Forms.Button();
+            this.donateLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // welcomeLabel
@@ -50,7 +51,7 @@
             this.setupLabel.AutoSize = true;
             this.setupLabel.Location = new System.Drawing.Point(160, 92);
             this.setupLabel.Name = "setupLabel";
-            this.setupLabel.Size = new System.Drawing.Size(480, 84);
+            this.setupLabel.Size = new System.Drawing.Size(480, 126);
             this.setupLabel.TabIndex = 6;
             this.setupLabel.Text = resources.GetString("setupLabel.Text");
             this.setupLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -66,12 +67,25 @@
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
+            // donateLabel
+            // 
+            this.donateLabel.AutoSize = true;
+            this.donateLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
+            this.donateLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.donateLabel.Location = new System.Drawing.Point(370, 227);
+            this.donateLabel.Name = "donateLabel";
+            this.donateLabel.Size = new System.Drawing.Size(60, 21);
+            this.donateLabel.TabIndex = 37;
+            this.donateLabel.Text = "Donate";
+            this.donateLabel.Click += new System.EventHandler(this.donateLabel_Click);
+            // 
             // SetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.donateLabel);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.setupLabel);
             this.Controls.Add(this.welcomeLabel);
@@ -91,5 +105,6 @@
         private Label welcomeLabel;
         private Label setupLabel;
         private Button settingsButton;
+        private Label donateLabel;
     }
 }

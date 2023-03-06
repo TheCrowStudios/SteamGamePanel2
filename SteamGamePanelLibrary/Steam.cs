@@ -35,8 +35,13 @@ namespace SteamGamePanelLibrary
         static void EnterSteamGuardInThread(object _account)
         {
             SteamUserModel user = (SteamUserModel)_account;
+
+            if (user.SharedSecret == null) return;
+
             Process steamProcess = new Process();
             bool steamProcessFound = false;
+
+            user.Status = "Finding Steam guard window.";
 
             int attempts = 0;
 
@@ -52,6 +57,7 @@ namespace SteamGamePanelLibrary
                     {
                         steamProcess = steamProcesses[i];
                         steamProcessFound = true;
+                        user.GameProcess = steamProcess;
                         break;
                     }
                     else if (i == steamProcesses.Length - 1 && attempts >= 10 && !steamProcessFound) return;
@@ -61,9 +67,12 @@ namespace SteamGamePanelLibrary
                 Thread.Sleep(5000);
             }
 
+            user.Status = "Entering Steam guard.";
+            
             attempts = 0;
 
-            // TODO - Fix attempt to enter steam guard for multiple accounts at the same time.
+            // DONE - Fix attempt to enter steam guard for multiple accounts at the same time.
+            // TODO - Fix program crashing if Steam is closed while trying to enter Steam guard.
             while (attempts < 3)
             {
                 SteamGuardAccount steamGuardAccount = new SteamGuardAccount();
@@ -74,11 +83,16 @@ namespace SteamGamePanelLibrary
                 InputSimulator inputSimulator = new InputSimulator();
                 inputSimulator.Keyboard.TextEntry(steamGuardCode);
                 inputSimulator.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
-                user.GameProcess = steamProcess;
-                if (steamProcess.MainWindowTitle != "[#] Steam Sign In [#]") return;
+                if (steamProcess.MainWindowTitle != "[#] Steam Sign In [#]")
+                {
+                    user.Status = "Steam guard entered.";
+                    return;
+                }
                 Thread.Sleep(5000);
                 attempts += 1;
             }
+
+            user.Status = "Could not enter Steam guard.";
         }
 
         /// <summary>

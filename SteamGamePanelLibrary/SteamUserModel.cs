@@ -14,6 +14,8 @@ namespace SteamGamePanelLibrary
         public string SharedSecret { get; set; }
         public string SteamID { get; set; }
         public string SteamInventory { get; set; }
+        public string Inventory { get; set; }
+        public string Status { get; set; }
         public Process GameProcess { get; set; }
 
         public SteamUserModel()
@@ -33,6 +35,45 @@ namespace SteamGamePanelLibrary
             Password = _password;
             SharedSecret = _sharedSecret;
             SteamID = _steamID;
+        }
+
+        public void StartSearchingForNewInventoryItems(int _timeBetweenInventoryRequest)
+        {
+            Thread thread = new Thread(new ParameterizedThreadStart(SearchForNewinventoryItemsInThread));
+            thread.Start(_timeBetweenInventoryRequest);
+        }
+
+        void SearchForNewinventoryItemsInThread(object _timeBetweenInventoryRequest)
+        {
+            int timeBetweenInventoryRequest = (int)_timeBetweenInventoryRequest;
+
+            if (SteamID == null) return;
+
+            Inventory = SteamWebRequest.GetUserInventory(this);
+
+            // DONE - Check if a case is added.
+
+
+            Thread.Sleep(60000);
+            
+            while (true)
+            {
+                if (GameProcess.HasExited) return;
+                
+                string? newInventory = SteamWebRequest.GetUserInventory(this);
+
+                if (newInventory != null)
+                {
+                    if (newInventory != Inventory)
+                    {
+                        Inventory = newInventory;
+                        GameProcess.Kill();
+                        return;
+                    }
+
+                    Thread.Sleep(timeBetweenInventoryRequest);
+                }
+            }
         }
     }
 }

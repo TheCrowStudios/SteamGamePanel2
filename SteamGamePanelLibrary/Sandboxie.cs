@@ -16,7 +16,7 @@ namespace SteamGamePanelLibrary
             SandboxiePath = _sandboxiePath;
         }
 
-        public static void CreateBox(string _title, string _configurationPath)
+        public static void CreateBox(string _title, string _sandboxiePath, string _configurationPath)
         {
             if (!File.Exists(_configurationPath)) return;
             
@@ -34,6 +34,8 @@ namespace SteamGamePanelLibrary
                     sw.WriteLine($"[{_title}]\nEnabled=y\nBlockNetworkFiles=y\nRecoverFolder=%{{374DE290-123F-4565-9164-39C4925E467B}}%\nRecoverFolder=%Personal%\nRecoverFolder=%Desktop%\nBorderColor=#02f6f6,ttl\nTemplate=OpenBluetooth\nTemplate=SkipHook\nTemplate=FileCopy\nTemplate=qWave\nTemplate=BlockPorts\nTemplate=LingerPrograms\nTemplate=AutoRecoverIgnore\nConfigLevel=9\nAutoRecover=y\nUseSecurityMode=n\nUsePrivacyMode=n\nOpenPipePath=D:\\SteamLibrary\n");
                 }
             }
+
+            ReloadSandboxie(_sandboxiePath);
         }
 
         public static void RemoveBox(string _title, string _sandboxiePath)
@@ -51,6 +53,7 @@ namespace SteamGamePanelLibrary
 
             sandboxie.StartInfo.FileName = _sandboxiePath;
             sandboxie.StartInfo.Arguments = $"/reload";
+            sandboxie.Start();
         }
 
         public void LaunchSteamAndLoginInSandbox(SteamUserModel _account, string _steamLauncher)
@@ -64,7 +67,7 @@ namespace SteamGamePanelLibrary
             _account.GameProcess = sandboxie;
         }
 
-        // TODO - Use threads to add time between users launching.
+        // DONE - Use threads to add time between users launching.
         public void LaunchSteamAndLoginAccountsInSandbox(List<SteamUserModel> _accounts, string _steamLauncher)
         {
             Thread thread = new Thread(() => LaunchSteamAndLoginAccountsInSandboxInThread(_accounts, _steamLauncher));

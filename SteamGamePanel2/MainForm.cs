@@ -21,6 +21,9 @@ namespace SteamGamePanel2
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            SplashForm splashForm = new SplashForm();
+            splashForm.Show();
+            
             bool setup = false;
             
             sandboxProgramCombo.DataSource = Enum.GetNames(typeof(SandboxPrograms));
@@ -38,6 +41,8 @@ namespace SteamGamePanel2
             SandboxieProgram = new Sandboxie(Config.SandboxiePath);
 
             UpdateUserList();
+            Themes.SetFormTheme(this);
+            splashForm.Close();
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
@@ -66,7 +71,7 @@ namespace SteamGamePanel2
             for (int i = 0; i < Config.SteamUsers.Count; i++)
             {
                 accountsList.Items.Add(Config.SteamUsers[i].Username);
-                accountsList.Items[i].SubItems.Add(Config.SteamUsers[i].GameProcess?.Id.ToString());
+                accountsList.Items[i].SubItems.Add($"{Config.SteamUsers[i].GameProcess?.Id.ToString()} - {Config.SteamUsers[i].GameProcess?.MainWindowTitle}");
             }
         }
 
@@ -92,14 +97,21 @@ namespace SteamGamePanel2
 
         private void launchGameButton_Click(object sender, EventArgs e)
         {
+            List<SteamUserModel> accountsToLaunch = GetAccountsToLaunch();
+
             switch (sandboxProgramCombo.SelectedIndex)
             {
                 case (int)SandboxPrograms.Avast:
                     break;
 
                 case (int)SandboxPrograms.Sandboxie:
-                    SandboxieProgram.LaunchSteamGamesInSandbox(GetAccountsToLaunch(), Config.SteamPath, Config.GameID, Config.GameWindowWidth, Config.GameWindowHeight, Config.ScreenWidth, Config.ScreenHeight, Config.GameServerIP, Config.GameServerPort);
+                    SandboxieProgram.LaunchSteamGamesInSandbox(accountsToLaunch, Config.SteamPath, Config.GameID, Config.GameWindowWidth, Config.GameWindowHeight, Config.ScreenWidth, Config.ScreenHeight, Config.GameServerIP, Config.GameServerPort);
                     break;
+            }
+
+            for (int i = 0; i < accountsToLaunch.Count; i++)
+            {
+                accountsToLaunch[i].StartSearchingForNewInventoryItems(Config.TimeBetweenInventoryRequest);
             }
         }
 
@@ -117,6 +129,12 @@ namespace SteamGamePanel2
             else accountsToLaunch = Config.SteamUsers;
 
             return accountsToLaunch;
+        }
+
+        private void donateLabel_Click(object sender, EventArgs e)
+        {
+            DonateForm form = new DonateForm();
+            form.Show();
         }
     }
 }
