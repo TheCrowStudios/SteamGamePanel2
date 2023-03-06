@@ -42,6 +42,7 @@
             this.sandboxProgramCombo = new System.Windows.Forms.ComboBox();
             this.sandboxProgramLabel = new System.Windows.Forms.Label();
             this.donateLabel = new System.Windows.Forms.Label();
+            this.versionLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // launchSteamButton
@@ -169,12 +170,22 @@
             this.donateLabel.Text = "Donate";
             this.donateLabel.Click += new System.EventHandler(this.donateLabel_Click);
             // 
+            // versionLabel
+            // 
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.Location = new System.Drawing.Point(12, 9);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(84, 21);
+            this.versionLabel.TabIndex = 37;
+            this.versionLabel.Text = "<Version>";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.donateLabel);
             this.Controls.Add(this.sandboxProgramLabel);
             this.Controls.Add(this.sandboxProgramCombo);
@@ -212,5 +223,6 @@
         private Label sandboxProgramLabel;
         private ColumnHeader statusHeader;
         private Label donateLabel;
+        private Label versionLabel;
     }
 }

@@ -41,6 +41,7 @@ namespace SteamGamePanel2
             SandboxieProgram = new Sandboxie(Config.SandboxiePath);
 
             UpdateUserList();
+            versionLabel.Text = Themes.Version;
             Themes.SetFormTheme(this);
             splashForm.Close();
         }
