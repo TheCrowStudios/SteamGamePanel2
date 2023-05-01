@@ -1,5 +1,6 @@
 using SteamGamePanelLibrary;
 using SteamGamePanelUI;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SteamGamePanel2
 {
@@ -13,10 +14,11 @@ namespace SteamGamePanel2
 
         public Configuration Config { get; set; }
         public Sandboxie SandboxieProgram { get; set; }
-
+       // public Avast Avast { get; set; }
         public MainForm()
         {
             InitializeComponent();
+            
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -79,10 +81,11 @@ namespace SteamGamePanel2
         private void launchSteamButton_Click(object sender, EventArgs e)
         {
             List<SteamUserModel> accountsToLaunch = GetAccountsToLaunch();
-
+            Avast myAvast = new Avast();
             switch (sandboxProgramCombo.SelectedIndex)
             {
                 case (int)SandboxPrograms.Avast:
+                    myAvast.LaunchSteamAndLoginAccountsInSandbox(accountsToLaunch, Config.SteamPath);
                     break;
 
                 case (int)SandboxPrograms.Sandboxie:

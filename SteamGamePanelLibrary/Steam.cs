@@ -53,7 +53,7 @@ namespace SteamGamePanelLibrary
 
                 for (int i = 0; i < steamProcesses.Length; i++)
                 {
-                    if (steamProcesses[i].MainWindowTitle == "[#] Steam Sign In [#]" && steamProcesses[i].StartTime - user.GameProcess.StartTime < TimeSpan.FromMilliseconds(500))
+                    if (steamProcesses[i].MainWindowTitle.Contains("Steam Sign In") && steamProcesses[i].StartTime - user.GameProcess.StartTime < TimeSpan.FromMilliseconds(500))
                     {
                         steamProcess = steamProcesses[i];
                         steamProcessFound = true;
@@ -79,11 +79,11 @@ namespace SteamGamePanelLibrary
                 steamGuardAccount.SharedSecret = user.SharedSecret;
                 string steamGuardCode = steamGuardAccount.GenerateSteamGuardCode();
                 SetForegroundWindow(steamProcess.MainWindowHandle);
-                Thread.Sleep(50);
+                Thread.Sleep(150);
                 InputSimulator inputSimulator = new InputSimulator();
                 inputSimulator.Keyboard.TextEntry(steamGuardCode);
                 inputSimulator.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
-                if (steamProcess.MainWindowTitle != "[#] Steam Sign In [#]")
+                if (!steamProcess.MainWindowTitle.Contains("Steam Sign In"))
                 {
                     user.Status = "Steam guard entered.";
                     return;
