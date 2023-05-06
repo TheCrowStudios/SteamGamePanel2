@@ -57,14 +57,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="setupLabel.Text" xml:space="preserve">
-    <value>Thank you for installing SteamGamePanel2.
-Details on how to use the program can be found in the README file.
-In order to proceed you will need to setup the program
-and add some users, this will only take a few minutes.
-
-If you find the program useful, please consider donating.
-
-- Crow</value>
-  </data>
 </root>

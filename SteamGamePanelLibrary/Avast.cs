@@ -9,56 +9,15 @@ namespace SteamGamePanelLibrary
 {
    public class Avast : ISandboxProgram
     {
-        //public string SandboxiePath { get; set; }
-       //public string
+        public string Title { get; set; } = "Avast";
+
         public Avast()
         {
-         //  SandboxiePath = _sandboxiePath;
+            
         }
-
-        //public static void CreateBox(string _title, string _sandboxiePath, string _configurationPath)
-        //{
-        //    if (!File.Exists(_configurationPath)) return;
-
-        //    string configuration;
-
-        //    using (StreamReader sr = new StreamReader(_configurationPath))
-        //    {
-        //        configuration = sr.ReadToEnd();
-        //    }
-
-        //    using (StreamWriter sw = new StreamWriter(_configurationPath, true, Encoding.Unicode))
-        //    {
-        //        if (!configuration.Contains($"[{_title}]"))
-        //        {
-        //            sw.WriteLine($"[{_title}]\nEnabled=y\nBlockNetworkFiles=y\nRecoverFolder=%{{374DE290-123F-4565-9164-39C4925E467B}}%\nRecoverFolder=%Personal%\nRecoverFolder=%Desktop%\nBorderColor=#02f6f6,ttl\nTemplate=OpenBluetooth\nTemplate=SkipHook\nTemplate=FileCopy\nTemplate=qWave\nTemplate=BlockPorts\nTemplate=LingerPrograms\nTemplate=AutoRecoverIgnore\nConfigLevel=9\nAutoRecover=y\nUseSecurityMode=n\nUsePrivacyMode=n\nOpenPipePath=D:\\SteamLibrary\n");
-        //        }
-        //    }
-
-        //    ReloadSandboxie(_sandboxiePath);
-        //}
-
-        //public static void RemoveBox(string _title, string _sandboxiePath)
-        //{
-        //    Process sandboxie = new Process();
-
-        //    sandboxie.StartInfo.FileName = _sandboxiePath;
-        //    sandboxie.StartInfo.Arguments = $"/box:{_title} delete_sandbox";
-        //    sandboxie.Start();
-        //}
-
-        //public static void ReloadSandboxie(string _sandboxiePath)
-        //{
-        //    Process sandboxie = new Process();
-
-        //    sandboxie.StartInfo.FileName = _sandboxiePath;
-        //    sandboxie.StartInfo.Arguments = $"/reload";
-        //    sandboxie.Start();
-        //}
 
         public void LaunchSteamAndLoginInSandbox(SteamUserModel _account, string _steamLauncher)
         {
-            //ReloadSandboxie(SandboxiePath);
             Process avast = new Process();
 
             avast.StartInfo.FileName = _steamLauncher;
@@ -68,7 +27,7 @@ namespace SteamGamePanelLibrary
         }
 
         // DONE - Use threads to add time between users launching.
-        public void LaunchSteamAndLoginAccountsInSandbox(List<SteamUserModel> _accounts, string _steamLauncher)
+        public void LaunchSteamAndLoginInSandbox(List<SteamUserModel> _accounts, string _steamLauncher)
         {
             Thread thread = new Thread(() => LaunchSteamAndLoginAccountsInSandboxInThread(_accounts, _steamLauncher));
             thread.Start();
@@ -99,7 +58,7 @@ namespace SteamGamePanelLibrary
             _account.GameProcess = avast;
         }
 
-        public void LaunchSteamGamesInSandbox(List<SteamUserModel> _accounts, string _steamLauncher, string _gameID, int _windowWidth, int _windowHeight, int _monitorWidth, int _monitorHeight, string? _ip, string? _port)
+        public void LaunchSteamGameInSandbox(List<SteamUserModel> _accounts, string _steamLauncher, string _gameID, int _windowWidth, int _windowHeight, int _monitorWidth, int _monitorHeight, string? _ip, string? _port)
         {
             int widthUsed = 0;
             int heightUsed = 0;

@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace SteamGamePanelLibrary
 {
-    internal interface ISandboxProgram
+    public interface ISandboxProgram
     {
+        /// <summary>
+        /// The title that appears when selecting the program.
+        /// </summary>
+        public string Title { get; set; }
+
         /// <summary>
         /// Launches a Steam account in sandbox and logs in.
         /// </summary>
@@ -19,7 +24,7 @@ namespace SteamGamePanelLibrary
         /// </summary>
         /// <param name="_accounts"></param>
         /// <param name="_steamLauncher"></param>
-        public void LaunchSteamAndLoginAccountsInSandbox(List<SteamUserModel> _accounts, string _steamLauncher);
+        public void LaunchSteamAndLoginInSandbox(List<SteamUserModel> _accounts, string _steamLauncher);
         /// <summary>
         /// Launches a Steam game in a sandbox on an account.
         /// </summary>
@@ -45,6 +50,6 @@ namespace SteamGamePanelLibrary
         /// <param name="_monitorHeight"></param>
         /// <param name="_ip"></param>
         /// <param name="_port"></param>
-        public void LaunchSteamGamesInSandbox(List<SteamUserModel> _accounts, string _steamLauncher, string _gameID, int _windowWidth, int _windowHeight, int _monitorWidth, int _monitorHeight, string? _ip, string? _port);
+        public void LaunchSteamGameInSandbox(List<SteamUserModel> _accounts, string _steamLauncher, string _gameID, int _windowWidth, int _windowHeight, int _monitorWidth, int _monitorHeight, string? _ip, string? _port);
     }
 }

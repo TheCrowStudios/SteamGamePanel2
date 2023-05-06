@@ -28,6 +28,9 @@ namespace SteamGamePanelLibrary
         /// Sandboxie configuration file path.
         /// </summary>
         public string SandboxieConfigurationPath { get; set; }
+        /// <summary>
+        /// The Steam game id to launch.
+        /// </summary>
         public string GameID { get; set; } = "730";
         /// <summary>
         /// IP of the game server to pass as an argument to Steam.
@@ -129,7 +132,7 @@ namespace SteamGamePanelLibrary
             }
             
             SteamUsers.Add(new SteamUserModel(_username, _password));
-            Sandboxie.CreateBox(_username, SandboxiePath, SandboxieConfigurationPath);
+            if (File.Exists(SandboxiePath) && File.Exists(SandboxieConfigurationPath)) Sandboxie.CreateBox(_username, SandboxiePath, SandboxieConfigurationPath);
             ScanMaFilesAndUpdateUsers();
             SaveConfig();
             return true;
@@ -146,7 +149,7 @@ namespace SteamGamePanelLibrary
                 if (SteamUsers[i].Username == _username) SteamUsers.RemoveAt(i);
             }
 
-            Sandboxie.RemoveBox(_username, SandboxiePath);
+            if (File.Exists(SandboxiePath)) Sandboxie.RemoveBox(_username, SandboxiePath);
             SaveConfig();
         }
 

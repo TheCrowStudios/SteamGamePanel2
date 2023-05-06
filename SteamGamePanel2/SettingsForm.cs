@@ -40,6 +40,8 @@ namespace SteamGamePanelUI
             maFilesPathText.Text = Config.MaFilesPath;
             UpdateColors();
             Themes.SetFormTheme(this);
+
+            notifyLabel.Text = "";
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -48,24 +50,21 @@ namespace SteamGamePanelUI
 
             Config.SteamPath = steamPathText.Text;
             if (int.TryParse(inventoryRequestTimeText.Text, out value)) Config.TimeBetweenInventoryRequest = value;
-            else inventoryRequestTimeLabel.ForeColor = Color.Red;
             Config.ScanUserInventory = scanUserInventoryCheck.Checked;
             Config.SandboxiePath = sandboxiePathText.Text;
             Config.SandboxieConfigurationPath = sandboxieConfigurationPathText.Text;
             Config.GameID = gameIDText.Text;
             if (int.TryParse(gameWidthText.Text, out value)) Config.GameWindowWidth = value;
-            else gameWidthLabel.ForeColor = Color.Red;
             if (int.TryParse(gameHeightText.Text, out value)) Config.GameWindowHeight = value;
-            else gameHeightLabel.ForeColor = Color.Red;
             Config.GameServerIP = gameIPText.Text;
             Config.GameServerPort = gamePortText.Text;
             if (int.TryParse(monitorWidthText.Text, out value)) Config.ScreenWidth = value;
-            else monitorWidthLabel.ForeColor = Color.Red;
             if (int.TryParse(monitorHeightText.Text, out value)) Config.ScreenHeight = value;
-            else monitorHeightLabel.ForeColor = Color.Red;
             Config.MaFilesPath = maFilesPathText.Text;
             Config.SaveConfig();
             UpdateColors();
+
+            notifyLabel.Text = "Saved";
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

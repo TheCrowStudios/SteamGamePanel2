@@ -13,8 +13,7 @@ namespace SteamGamePanel2
         }
 
         public Configuration Config { get; set; }
-        public Sandboxie SandboxieProgram { get; set; }
-       // public Avast Avast { get; set; }
+        public List<ISandboxProgram> Sandboxes { get; set; } = new List<ISandboxProgram>();
         public MainForm()
         {
             InitializeComponent();
@@ -28,24 +27,32 @@ namespace SteamGamePanel2
             
             bool setup = false;
             
-            sandboxProgramCombo.DataSource = Enum.GetNames(typeof(SandboxPrograms));
+            //sandboxProgramCombo.DataSource = Enum.GetNames(typeof(SandboxPrograms));
             
             if (!Configuration.CheckForConfiguration()) setup = true;
             Config = Configuration.LoadConfig();
             Config.SaveConfig();
+
+            Sandboxes.Add(new Avast());
+            Sandboxes.Add(new Sandboxie(Config.SandboxiePath));
+
+            for (int i = 0; i < Sandboxes.Count; i++)
+            {
+                sandboxProgramCombo.Items.Add(Sandboxes[i].Title);
+            }
+
+            sandboxProgramCombo.SelectedIndex = 0;
+
+            UpdateUserList();
+            versionLabel.Text = Themes.Version;
+            Themes.SetFormTheme(this);
+            splashForm.Close();
 
             if (setup)
             {
                 SetupForm form = new SetupForm(Config);
                 form.ShowDialog();
             }
-
-            SandboxieProgram = new Sandboxie(Config.SandboxiePath);
-
-            UpdateUserList();
-            versionLabel.Text = Themes.Version;
-            Themes.SetFormTheme(this);
-            splashForm.Close();
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
@@ -75,23 +82,15 @@ namespace SteamGamePanel2
             {
                 accountsList.Items.Add(Config.SteamUsers[i].Username);
                 accountsList.Items[i].SubItems.Add($"{Config.SteamUsers[i].GameProcess?.Id.ToString()} - {Config.SteamUsers[i].GameProcess?.MainWindowTitle}");
+                accountsList.Items[i].SubItems.Add($"{Config.SteamUsers[i].Status}");
             }
         }
 
         private void launchSteamButton_Click(object sender, EventArgs e)
         {
             List<SteamUserModel> accountsToLaunch = GetAccountsToLaunch();
-            Avast myAvast = new Avast();
-            switch (sandboxProgramCombo.SelectedIndex)
-            {
-                case (int)SandboxPrograms.Avast:
-                    myAvast.LaunchSteamAndLoginAccountsInSandbox(accountsToLaunch, Config.SteamPath);
-                    break;
 
-                case (int)SandboxPrograms.Sandboxie:
-                    SandboxieProgram.LaunchSteamAndLoginAccountsInSandbox(accountsToLaunch, Config.SteamPath);
-                    break;
-            }
+            Sandboxes[sandboxProgramCombo.SelectedIndex].LaunchSteamAndLoginInSandbox(accountsToLaunch, Config.SteamPath);
         }
 
         private void refreshButton_Click(object sender, EventArgs e)
@@ -103,15 +102,9 @@ namespace SteamGamePanel2
         {
             List<SteamUserModel> accountsToLaunch = GetAccountsToLaunch();
 
-            switch (sandboxProgramCombo.SelectedIndex)
-            {
-                case (int)SandboxPrograms.Avast:
-                    break;
+            Sandboxes[sandboxProgramCombo.SelectedIndex].LaunchSteamGameInSandbox(accountsToLaunch, Config.SteamPath, Config.GameID, Config.GameWindowWidth, Config.GameWindowHeight, Config.ScreenWidth, Config.ScreenHeight, Config.GameServerIP, Config.GameServerPort);
 
-                case (int)SandboxPrograms.Sandboxie:
-                    SandboxieProgram.LaunchSteamGamesInSandbox(accountsToLaunch, Config.SteamPath, Config.GameID, Config.GameWindowWidth, Config.GameWindowHeight, Config.ScreenWidth, Config.ScreenHeight, Config.GameServerIP, Config.GameServerPort);
-                    break;
-            }
+            if (!Config.ScanUserInventory) return;
 
             for (int i = 0; i < accountsToLaunch.Count; i++)
             {
@@ -139,6 +132,17 @@ namespace SteamGamePanel2
         {
             DonateForm form = new DonateForm();
             form.Show();
+        }
+
+        private void creditsLabel_Click(object sender, EventArgs e)
+        {
+            CreditsForm form = new CreditsForm();
+            form.Show();
+        }
+
+        private void refreshTimer_Tick(object sender, EventArgs e)
+        {
+            UpdateUserList();
         }
     }
 }

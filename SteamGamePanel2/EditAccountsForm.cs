@@ -57,13 +57,15 @@ namespace SteamGamePanelUI
         private void removeButton_Click(object sender, EventArgs e)
         {
             if (accountsList.SelectedItems.Count == 0) return;
-
-            ListView.SelectedListViewItemCollection selectedListViewItemCollection = accountsList.SelectedItems;
             
             for (int i = 0; i < accountsList.SelectedItems.Count; i++)
             {
                 Config.RemoveSteamUser(accountsList.SelectedItems[i].Text);
-                accountsList.Items.Remove(accountsList.SelectedItems[i]);
+            }
+
+            while (accountsList.SelectedItems.Count != 0)
+            {
+                accountsList.Items.Remove(accountsList.SelectedItems[0]);
             }
         }
     }

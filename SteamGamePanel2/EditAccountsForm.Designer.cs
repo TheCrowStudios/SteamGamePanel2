@@ -39,6 +39,8 @@
             this.processIDHeader = new System.Windows.Forms.ColumnHeader();
             this.notifyLabel = new System.Windows.Forms.Label();
             this.accountsLabel = new System.Windows.Forms.Label();
+            this.versionLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // addUserButton
@@ -48,7 +50,7 @@
             this.addUserButton.Name = "addUserButton";
             this.addUserButton.Size = new System.Drawing.Size(130, 50);
             this.addUserButton.TabIndex = 6;
-            this.addUserButton.Text = "Add user";
+            this.addUserButton.Text = "Add account";
             this.addUserButton.UseVisualStyleBackColor = true;
             this.addUserButton.Click += new System.EventHandler(this.addUserButton_Click);
             // 
@@ -65,7 +67,7 @@
             // 
             // usernameText
             // 
-            this.usernameText.Location = new System.Drawing.Point(152, 112);
+            this.usernameText.Location = new System.Drawing.Point(144, 112);
             this.usernameText.Name = "usernameText";
             this.usernameText.Size = new System.Drawing.Size(171, 29);
             this.usernameText.TabIndex = 10;
@@ -73,7 +75,7 @@
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Location = new System.Drawing.Point(65, 115);
+            this.usernameLabel.Location = new System.Drawing.Point(57, 115);
             this.usernameLabel.Name = "usernameLabel";
             this.usernameLabel.Size = new System.Drawing.Size(81, 21);
             this.usernameLabel.TabIndex = 11;
@@ -82,7 +84,7 @@
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(70, 150);
+            this.passwordLabel.Location = new System.Drawing.Point(62, 150);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(76, 21);
             this.passwordLabel.TabIndex = 13;
@@ -90,7 +92,7 @@
             // 
             // passwordText
             // 
-            this.passwordText.Location = new System.Drawing.Point(152, 147);
+            this.passwordText.Location = new System.Drawing.Point(144, 147);
             this.passwordText.Name = "passwordText";
             this.passwordText.Size = new System.Drawing.Size(171, 29);
             this.passwordText.TabIndex = 12;
@@ -122,7 +124,7 @@
             // notifyLabel
             // 
             this.notifyLabel.AutoSize = true;
-            this.notifyLabel.Location = new System.Drawing.Point(65, 194);
+            this.notifyLabel.Location = new System.Drawing.Point(57, 194);
             this.notifyLabel.Name = "notifyLabel";
             this.notifyLabel.Size = new System.Drawing.Size(75, 21);
             this.notifyLabel.TabIndex = 15;
@@ -139,12 +141,32 @@
             this.accountsLabel.Text = "Accounts";
             this.accountsLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // versionLabel
+            // 
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.Location = new System.Drawing.Point(12, 9);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(84, 21);
+            this.versionLabel.TabIndex = 38;
+            this.versionLabel.Text = "<Version>";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(144, 88);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(143, 21);
+            this.label1.TabIndex = 39;
+            this.label1.Text = "Add Steam account";
+            // 
             // EditAccountsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.accountsLabel);
             this.Controls.Add(this.notifyLabel);
             this.Controls.Add(this.accountsList);
@@ -177,5 +199,7 @@
         private ColumnHeader processIDHeader;
         private Label notifyLabel;
         private Label accountsLabel;
+        private Label versionLabel;
+        private Label label1;
     }
 }

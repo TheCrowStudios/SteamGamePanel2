@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.launchSteamButton = new System.Windows.Forms.Button();
             this.launchGameButton = new System.Windows.Forms.Button();
@@ -43,12 +44,14 @@
             this.sandboxProgramLabel = new System.Windows.Forms.Label();
             this.donateLabel = new System.Windows.Forms.Label();
             this.versionLabel = new System.Windows.Forms.Label();
+            this.creditsLabel = new System.Windows.Forms.Label();
+            this.refreshTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // launchSteamButton
             // 
             this.launchSteamButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.launchSteamButton.Location = new System.Drawing.Point(41, 300);
+            this.launchSteamButton.Location = new System.Drawing.Point(41, 320);
             this.launchSteamButton.Name = "launchSteamButton";
             this.launchSteamButton.Size = new System.Drawing.Size(130, 50);
             this.launchSteamButton.TabIndex = 0;
@@ -59,7 +62,7 @@
             // launchGameButton
             // 
             this.launchGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.launchGameButton.Location = new System.Drawing.Point(177, 300);
+            this.launchGameButton.Location = new System.Drawing.Point(177, 320);
             this.launchGameButton.Name = "launchGameButton";
             this.launchGameButton.Size = new System.Drawing.Size(130, 50);
             this.launchGameButton.TabIndex = 1;
@@ -110,7 +113,7 @@
             // settingsButton
             // 
             this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.settingsButton.Location = new System.Drawing.Point(41, 356);
+            this.settingsButton.Location = new System.Drawing.Point(481, 320);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(130, 50);
             this.settingsButton.TabIndex = 3;
@@ -132,7 +135,7 @@
             // refreshButton
             // 
             this.refreshButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.refreshButton.Location = new System.Drawing.Point(477, 320);
+            this.refreshButton.Location = new System.Drawing.Point(617, 320);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(130, 50);
             this.refreshButton.TabIndex = 6;
@@ -144,7 +147,7 @@
             // 
             this.sandboxProgramCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sandboxProgramCombo.FormattingEnabled = true;
-            this.sandboxProgramCombo.Location = new System.Drawing.Point(41, 265);
+            this.sandboxProgramCombo.Location = new System.Drawing.Point(41, 285);
             this.sandboxProgramCombo.Name = "sandboxProgramCombo";
             this.sandboxProgramCombo.Size = new System.Drawing.Size(121, 29);
             this.sandboxProgramCombo.TabIndex = 17;
@@ -152,7 +155,7 @@
             // sandboxProgramLabel
             // 
             this.sandboxProgramLabel.AutoSize = true;
-            this.sandboxProgramLabel.Location = new System.Drawing.Point(41, 241);
+            this.sandboxProgramLabel.Location = new System.Drawing.Point(36, 261);
             this.sandboxProgramLabel.Name = "sandboxProgramLabel";
             this.sandboxProgramLabel.Size = new System.Drawing.Size(135, 21);
             this.sandboxProgramLabel.TabIndex = 18;
@@ -179,12 +182,31 @@
             this.versionLabel.TabIndex = 37;
             this.versionLabel.Text = "<Version>";
             // 
+            // creditsLabel
+            // 
+            this.creditsLabel.AutoSize = true;
+            this.creditsLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
+            this.creditsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.creditsLabel.Location = new System.Drawing.Point(411, 373);
+            this.creditsLabel.Name = "creditsLabel";
+            this.creditsLabel.Size = new System.Drawing.Size(59, 21);
+            this.creditsLabel.TabIndex = 38;
+            this.creditsLabel.Text = "Credits";
+            this.creditsLabel.Click += new System.EventHandler(this.creditsLabel_Click);
+            // 
+            // refreshTimer
+            // 
+            this.refreshTimer.Enabled = true;
+            this.refreshTimer.Interval = 500;
+            this.refreshTimer.Tick += new System.EventHandler(this.refreshTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.creditsLabel);
             this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.donateLabel);
             this.Controls.Add(this.sandboxProgramLabel);
@@ -224,5 +246,7 @@
         private ColumnHeader statusHeader;
         private Label donateLabel;
         private Label versionLabel;
+        private Label creditsLabel;
+        private System.Windows.Forms.Timer refreshTimer;
     }
 }

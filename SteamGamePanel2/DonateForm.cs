@@ -23,7 +23,6 @@ namespace SteamGamePanelUI
         {
             moneroAddressLabel.Text = $"{MoneroAddress.Substring(0, 4)}...{MoneroAddress.Substring(MoneroAddress.Length - 4, 4)}";
 
-
             Themes.SetFormTheme(this);
         }
 

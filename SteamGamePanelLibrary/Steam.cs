@@ -32,6 +32,7 @@ namespace SteamGamePanelLibrary
             thread.Start(_account);
         }
 
+        // TODO - Add input settings.
         static void EnterSteamGuardInThread(object _account)
         {
             SteamUserModel user = (SteamUserModel)_account;
@@ -49,8 +50,6 @@ namespace SteamGamePanelLibrary
             {
                 Process[] steamProcesses = Process.GetProcessesByName("Steam");
 
-                if (steamProcesses.Length == 0) return;
-
                 for (int i = 0; i < steamProcesses.Length; i++)
                 {
                     if (steamProcesses[i].MainWindowTitle.Contains("Steam Sign In") && steamProcesses[i].StartTime - user.GameProcess.StartTime < TimeSpan.FromMilliseconds(500))
@@ -60,13 +59,18 @@ namespace SteamGamePanelLibrary
                         user.GameProcess = steamProcess;
                         break;
                     }
-                    else if (i == steamProcesses.Length - 1 && attempts >= 10 && !steamProcessFound) return;
                 }
 
                 attempts += 1;
                 Thread.Sleep(5000);
             }
 
+            if (!steamProcessFound)
+            {
+                user.Status = "Could not find steam process.";
+                return;
+            }
+            
             user.Status = "Entering Steam guard.";
             
             attempts = 0;
@@ -83,12 +87,15 @@ namespace SteamGamePanelLibrary
                 InputSimulator inputSimulator = new InputSimulator();
                 inputSimulator.Keyboard.TextEntry(steamGuardCode);
                 inputSimulator.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
+
                 if (!steamProcess.MainWindowTitle.Contains("Steam Sign In"))
                 {
                     user.Status = "Steam guard entered.";
                     return;
                 }
+
                 Thread.Sleep(5000);
+
                 attempts += 1;
             }
 

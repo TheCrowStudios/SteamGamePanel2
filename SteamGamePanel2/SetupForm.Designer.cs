@@ -51,7 +51,7 @@
             this.setupLabel.AutoSize = true;
             this.setupLabel.Location = new System.Drawing.Point(160, 92);
             this.setupLabel.Name = "setupLabel";
-            this.setupLabel.Size = new System.Drawing.Size(480, 126);
+            this.setupLabel.Size = new System.Drawing.Size(480, 168);
             this.setupLabel.TabIndex = 6;
             this.setupLabel.Text = resources.GetString("setupLabel.Text");
             this.setupLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -72,7 +72,7 @@
             this.donateLabel.AutoSize = true;
             this.donateLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
             this.donateLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.donateLabel.Location = new System.Drawing.Point(370, 227);
+            this.donateLabel.Location = new System.Drawing.Point(370, 266);
             this.donateLabel.Name = "donateLabel";
             this.donateLabel.Size = new System.Drawing.Size(60, 21);
             this.donateLabel.TabIndex = 37;

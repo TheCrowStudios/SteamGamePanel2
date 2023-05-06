@@ -31,6 +31,9 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.scanUserInventoryCheck = new System.Windows.Forms.CheckBox();
+            this.inventoryRequestTimeText = new System.Windows.Forms.TextBox();
+            this.inventoryRequestTimeLabel = new System.Windows.Forms.Label();
             this.maFilesPathLabel = new System.Windows.Forms.Label();
             this.maFilesPathText = new System.Windows.Forms.TextBox();
             this.sandboxieConfigurationPathText = new System.Windows.Forms.TextBox();
@@ -39,7 +42,7 @@
             this.monitorHeightText = new System.Windows.Forms.TextBox();
             this.monitorWidthLabel = new System.Windows.Forms.Label();
             this.monitorWidthText = new System.Windows.Forms.TextBox();
-            this.generalLabel = new System.Windows.Forms.Label();
+            this.accountsLabel = new System.Windows.Forms.Label();
             this.gamePortLabel = new System.Windows.Forms.Label();
             this.gamePortText = new System.Windows.Forms.TextBox();
             this.gameIPLabel = new System.Windows.Forms.Label();
@@ -58,9 +61,8 @@
             this.steamPathLabel = new System.Windows.Forms.Label();
             this.steamLabel = new System.Windows.Forms.Label();
             this.settingsLabel = new System.Windows.Forms.Label();
-            this.inventoryRequestTimeText = new System.Windows.Forms.TextBox();
-            this.inventoryRequestTimeLabel = new System.Windows.Forms.Label();
-            this.scanUserInventoryCheck = new System.Windows.Forms.CheckBox();
+            this.versionLabel = new System.Windows.Forms.Label();
+            this.notifyLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,7 +102,7 @@
             this.panel1.Controls.Add(this.monitorHeightText);
             this.panel1.Controls.Add(this.monitorWidthLabel);
             this.panel1.Controls.Add(this.monitorWidthText);
-            this.panel1.Controls.Add(this.generalLabel);
+            this.panel1.Controls.Add(this.accountsLabel);
             this.panel1.Controls.Add(this.gamePortLabel);
             this.panel1.Controls.Add(this.gamePortText);
             this.panel1.Controls.Add(this.gameIPLabel);
@@ -123,10 +125,36 @@
             this.panel1.Size = new System.Drawing.Size(776, 318);
             this.panel1.TabIndex = 32;
             // 
+            // scanUserInventoryCheck
+            // 
+            this.scanUserInventoryCheck.AutoSize = true;
+            this.scanUserInventoryCheck.Location = new System.Drawing.Point(177, 109);
+            this.scanUserInventoryCheck.Name = "scanUserInventoryCheck";
+            this.scanUserInventoryCheck.Size = new System.Drawing.Size(166, 25);
+            this.scanUserInventoryCheck.TabIndex = 60;
+            this.scanUserInventoryCheck.Text = "Scan user inventory";
+            this.scanUserInventoryCheck.UseVisualStyleBackColor = true;
+            // 
+            // inventoryRequestTimeText
+            // 
+            this.inventoryRequestTimeText.Location = new System.Drawing.Point(179, 74);
+            this.inventoryRequestTimeText.Name = "inventoryRequestTimeText";
+            this.inventoryRequestTimeText.Size = new System.Drawing.Size(171, 29);
+            this.inventoryRequestTimeText.TabIndex = 59;
+            // 
+            // inventoryRequestTimeLabel
+            // 
+            this.inventoryRequestTimeLabel.AutoSize = true;
+            this.inventoryRequestTimeLabel.Location = new System.Drawing.Point(6, 77);
+            this.inventoryRequestTimeLabel.Name = "inventoryRequestTimeLabel";
+            this.inventoryRequestTimeLabel.Size = new System.Drawing.Size(167, 21);
+            this.inventoryRequestTimeLabel.TabIndex = 58;
+            this.inventoryRequestTimeLabel.Text = "Inventory request time";
+            // 
             // maFilesPathLabel
             // 
             this.maFilesPathLabel.AutoSize = true;
-            this.maFilesPathLabel.Location = new System.Drawing.Point(80, 464);
+            this.maFilesPathLabel.Location = new System.Drawing.Point(75, 45);
             this.maFilesPathLabel.Name = "maFilesPathLabel";
             this.maFilesPathLabel.Size = new System.Drawing.Size(98, 21);
             this.maFilesPathLabel.TabIndex = 57;
@@ -134,14 +162,14 @@
             // 
             // maFilesPathText
             // 
-            this.maFilesPathText.Location = new System.Drawing.Point(184, 456);
+            this.maFilesPathText.Location = new System.Drawing.Point(179, 42);
             this.maFilesPathText.Name = "maFilesPathText";
             this.maFilesPathText.Size = new System.Drawing.Size(171, 29);
             this.maFilesPathText.TabIndex = 56;
             // 
             // sandboxieConfigurationPathText
             // 
-            this.sandboxieConfigurationPathText.Location = new System.Drawing.Point(184, 388);
+            this.sandboxieConfigurationPathText.Location = new System.Drawing.Point(179, 401);
             this.sandboxieConfigurationPathText.Name = "sandboxieConfigurationPathText";
             this.sandboxieConfigurationPathText.Size = new System.Drawing.Size(171, 29);
             this.sandboxieConfigurationPathText.TabIndex = 55;
@@ -149,7 +177,7 @@
             // sandboxieConfigurationPathLabel
             // 
             this.sandboxieConfigurationPathLabel.AutoSize = true;
-            this.sandboxieConfigurationPathLabel.Location = new System.Drawing.Point(37, 391);
+            this.sandboxieConfigurationPathLabel.Location = new System.Drawing.Point(32, 404);
             this.sandboxieConfigurationPathLabel.Name = "sandboxieConfigurationPathLabel";
             this.sandboxieConfigurationPathLabel.Size = new System.Drawing.Size(141, 21);
             this.sandboxieConfigurationPathLabel.TabIndex = 54;
@@ -158,7 +186,7 @@
             // monitorHeightLabel
             // 
             this.monitorHeightLabel.AutoSize = true;
-            this.monitorHeightLabel.Location = new System.Drawing.Point(64, 424);
+            this.monitorHeightLabel.Location = new System.Drawing.Point(59, 439);
             this.monitorHeightLabel.Name = "monitorHeightLabel";
             this.monitorHeightLabel.Size = new System.Drawing.Size(114, 21);
             this.monitorHeightLabel.TabIndex = 53;
@@ -166,7 +194,7 @@
             // 
             // monitorHeightText
             // 
-            this.monitorHeightText.Location = new System.Drawing.Point(184, 421);
+            this.monitorHeightText.Location = new System.Drawing.Point(179, 436);
             this.monitorHeightText.Name = "monitorHeightText";
             this.monitorHeightText.Size = new System.Drawing.Size(171, 29);
             this.monitorHeightText.TabIndex = 52;
@@ -174,7 +202,7 @@
             // monitorWidthLabel
             // 
             this.monitorWidthLabel.AutoSize = true;
-            this.monitorWidthLabel.Location = new System.Drawing.Point(69, 447);
+            this.monitorWidthLabel.Location = new System.Drawing.Point(64, 474);
             this.monitorWidthLabel.Name = "monitorWidthLabel";
             this.monitorWidthLabel.Size = new System.Drawing.Size(109, 21);
             this.monitorWidthLabel.TabIndex = 51;
@@ -182,24 +210,24 @@
             // 
             // monitorWidthText
             // 
-            this.monitorWidthText.Location = new System.Drawing.Point(184, 444);
+            this.monitorWidthText.Location = new System.Drawing.Point(179, 471);
             this.monitorWidthText.Name = "monitorWidthText";
             this.monitorWidthText.Size = new System.Drawing.Size(171, 29);
             this.monitorWidthText.TabIndex = 50;
             // 
-            // generalLabel
+            // accountsLabel
             // 
-            this.generalLabel.AutoSize = true;
-            this.generalLabel.Location = new System.Drawing.Point(184, 420);
-            this.generalLabel.Name = "generalLabel";
-            this.generalLabel.Size = new System.Drawing.Size(64, 21);
-            this.generalLabel.TabIndex = 49;
-            this.generalLabel.Text = "General";
+            this.accountsLabel.AutoSize = true;
+            this.accountsLabel.Location = new System.Drawing.Point(179, 18);
+            this.accountsLabel.Name = "accountsLabel";
+            this.accountsLabel.Size = new System.Drawing.Size(73, 21);
+            this.accountsLabel.TabIndex = 49;
+            this.accountsLabel.Text = "Accounts";
             // 
             // gamePortLabel
             // 
             this.gamePortLabel.AutoSize = true;
-            this.gamePortLabel.Location = new System.Drawing.Point(142, 300);
+            this.gamePortLabel.Location = new System.Drawing.Point(135, 307);
             this.gamePortLabel.Name = "gamePortLabel";
             this.gamePortLabel.Size = new System.Drawing.Size(38, 21);
             this.gamePortLabel.TabIndex = 48;
@@ -207,7 +235,7 @@
             // 
             // gamePortText
             // 
-            this.gamePortText.Location = new System.Drawing.Point(186, 297);
+            this.gamePortText.Location = new System.Drawing.Point(179, 304);
             this.gamePortText.Name = "gamePortText";
             this.gamePortText.Size = new System.Drawing.Size(171, 29);
             this.gamePortText.TabIndex = 47;
@@ -215,7 +243,7 @@
             // gameIPLabel
             // 
             this.gameIPLabel.AutoSize = true;
-            this.gameIPLabel.Location = new System.Drawing.Point(157, 262);
+            this.gameIPLabel.Location = new System.Drawing.Point(150, 269);
             this.gameIPLabel.Name = "gameIPLabel";
             this.gameIPLabel.Size = new System.Drawing.Size(23, 21);
             this.gameIPLabel.TabIndex = 46;
@@ -223,7 +251,7 @@
             // 
             // gameIPText
             // 
-            this.gameIPText.Location = new System.Drawing.Point(186, 262);
+            this.gameIPText.Location = new System.Drawing.Point(179, 269);
             this.gameIPText.Name = "gameIPText";
             this.gameIPText.Size = new System.Drawing.Size(171, 29);
             this.gameIPText.TabIndex = 45;
@@ -231,7 +259,7 @@
             // gameHeightLabel
             // 
             this.gameHeightLabel.AutoSize = true;
-            this.gameHeightLabel.Location = new System.Drawing.Point(124, 230);
+            this.gameHeightLabel.Location = new System.Drawing.Point(117, 237);
             this.gameHeightLabel.Name = "gameHeightLabel";
             this.gameHeightLabel.Size = new System.Drawing.Size(56, 21);
             this.gameHeightLabel.TabIndex = 44;
@@ -239,7 +267,7 @@
             // 
             // gameHeightText
             // 
-            this.gameHeightText.Location = new System.Drawing.Point(186, 227);
+            this.gameHeightText.Location = new System.Drawing.Point(179, 234);
             this.gameHeightText.Name = "gameHeightText";
             this.gameHeightText.Size = new System.Drawing.Size(171, 29);
             this.gameHeightText.TabIndex = 43;
@@ -247,7 +275,7 @@
             // gameWidthLabel
             // 
             this.gameWidthLabel.AutoSize = true;
-            this.gameWidthLabel.Location = new System.Drawing.Point(128, 195);
+            this.gameWidthLabel.Location = new System.Drawing.Point(121, 202);
             this.gameWidthLabel.Name = "gameWidthLabel";
             this.gameWidthLabel.Size = new System.Drawing.Size(52, 21);
             this.gameWidthLabel.TabIndex = 42;
@@ -255,7 +283,7 @@
             // 
             // gameWidthText
             // 
-            this.gameWidthText.Location = new System.Drawing.Point(186, 192);
+            this.gameWidthText.Location = new System.Drawing.Point(179, 199);
             this.gameWidthText.Name = "gameWidthText";
             this.gameWidthText.Size = new System.Drawing.Size(171, 29);
             this.gameWidthText.TabIndex = 41;
@@ -263,7 +291,7 @@
             // gameIDLabel
             // 
             this.gameIDLabel.AutoSize = true;
-            this.gameIDLabel.Location = new System.Drawing.Point(110, 160);
+            this.gameIDLabel.Location = new System.Drawing.Point(103, 167);
             this.gameIDLabel.Name = "gameIDLabel";
             this.gameIDLabel.Size = new System.Drawing.Size(70, 21);
             this.gameIDLabel.TabIndex = 40;
@@ -271,7 +299,7 @@
             // 
             // gameIDText
             // 
-            this.gameIDText.Location = new System.Drawing.Point(186, 157);
+            this.gameIDText.Location = new System.Drawing.Point(179, 164);
             this.gameIDText.Name = "gameIDText";
             this.gameIDText.Size = new System.Drawing.Size(171, 29);
             this.gameIDText.TabIndex = 39;
@@ -279,7 +307,7 @@
             // gameLabel
             // 
             this.gameLabel.AutoSize = true;
-            this.gameLabel.Location = new System.Drawing.Point(184, 133);
+            this.gameLabel.Location = new System.Drawing.Point(177, 140);
             this.gameLabel.Name = "gameLabel";
             this.gameLabel.Size = new System.Drawing.Size(51, 21);
             this.gameLabel.TabIndex = 38;
@@ -287,14 +315,14 @@
             // 
             // sandboxiePathText
             // 
-            this.sandboxiePathText.Location = new System.Drawing.Point(184, 353);
+            this.sandboxiePathText.Location = new System.Drawing.Point(179, 366);
             this.sandboxiePathText.Name = "sandboxiePathText";
             this.sandboxiePathText.Size = new System.Drawing.Size(171, 29);
             this.sandboxiePathText.TabIndex = 37;
             // 
             // steamPathText
             // 
-            this.steamPathText.Location = new System.Drawing.Point(184, 28);
+            this.steamPathText.Location = new System.Drawing.Point(184, -252);
             this.steamPathText.Name = "steamPathText";
             this.steamPathText.Size = new System.Drawing.Size(171, 29);
             this.steamPathText.TabIndex = 36;
@@ -302,7 +330,7 @@
             // sandboxiePathLabel
             // 
             this.sandboxiePathLabel.AutoSize = true;
-            this.sandboxiePathLabel.Location = new System.Drawing.Point(138, 356);
+            this.sandboxiePathLabel.Location = new System.Drawing.Point(133, 369);
             this.sandboxiePathLabel.Name = "sandboxiePathLabel";
             this.sandboxiePathLabel.Size = new System.Drawing.Size(40, 21);
             this.sandboxiePathLabel.TabIndex = 35;
@@ -311,7 +339,7 @@
             // sandboxieLabel
             // 
             this.sandboxieLabel.AutoSize = true;
-            this.sandboxieLabel.Location = new System.Drawing.Point(184, 329);
+            this.sandboxieLabel.Location = new System.Drawing.Point(179, 342);
             this.sandboxieLabel.Name = "sandboxieLabel";
             this.sandboxieLabel.Size = new System.Drawing.Size(82, 21);
             this.sandboxieLabel.TabIndex = 34;
@@ -320,7 +348,7 @@
             // steamPathLabel
             // 
             this.steamPathLabel.AutoSize = true;
-            this.steamPathLabel.Location = new System.Drawing.Point(138, 31);
+            this.steamPathLabel.Location = new System.Drawing.Point(138, -249);
             this.steamPathLabel.Name = "steamPathLabel";
             this.steamPathLabel.Size = new System.Drawing.Size(40, 21);
             this.steamPathLabel.TabIndex = 33;
@@ -329,7 +357,7 @@
             // steamLabel
             // 
             this.steamLabel.AutoSize = true;
-            this.steamLabel.Location = new System.Drawing.Point(184, 4);
+            this.steamLabel.Location = new System.Drawing.Point(184, -276);
             this.steamLabel.Name = "steamLabel";
             this.steamLabel.Size = new System.Drawing.Size(53, 21);
             this.steamLabel.TabIndex = 32;
@@ -346,31 +374,23 @@
             this.settingsLabel.Text = "Settings";
             this.settingsLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // inventoryRequestTimeText
+            // versionLabel
             // 
-            this.inventoryRequestTimeText.Location = new System.Drawing.Point(184, 63);
-            this.inventoryRequestTimeText.Name = "inventoryRequestTimeText";
-            this.inventoryRequestTimeText.Size = new System.Drawing.Size(171, 29);
-            this.inventoryRequestTimeText.TabIndex = 59;
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.Location = new System.Drawing.Point(12, 9);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(84, 21);
+            this.versionLabel.TabIndex = 38;
+            this.versionLabel.Text = "<Version>";
             // 
-            // inventoryRequestTimeLabel
+            // notifyLabel
             // 
-            this.inventoryRequestTimeLabel.AutoSize = true;
-            this.inventoryRequestTimeLabel.Location = new System.Drawing.Point(11, 66);
-            this.inventoryRequestTimeLabel.Name = "inventoryRequestTimeLabel";
-            this.inventoryRequestTimeLabel.Size = new System.Drawing.Size(167, 21);
-            this.inventoryRequestTimeLabel.TabIndex = 58;
-            this.inventoryRequestTimeLabel.Text = "Inventory request time";
-            // 
-            // scanUserInventoryCheck
-            // 
-            this.scanUserInventoryCheck.AutoSize = true;
-            this.scanUserInventoryCheck.Location = new System.Drawing.Point(184, 98);
-            this.scanUserInventoryCheck.Name = "scanUserInventoryCheck";
-            this.scanUserInventoryCheck.Size = new System.Drawing.Size(166, 25);
-            this.scanUserInventoryCheck.TabIndex = 60;
-            this.scanUserInventoryCheck.Text = "Scan user inventory";
-            this.scanUserInventoryCheck.UseVisualStyleBackColor = true;
+            this.notifyLabel.AutoSize = true;
+            this.notifyLabel.Location = new System.Drawing.Point(537, 382);
+            this.notifyLabel.Name = "notifyLabel";
+            this.notifyLabel.Size = new System.Drawing.Size(75, 21);
+            this.notifyLabel.TabIndex = 39;
+            this.notifyLabel.Text = "<Notify>";
             // 
             // SettingsForm
             // 
@@ -378,6 +398,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.notifyLabel);
+            this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.settingsLabel);
             this.Controls.Add(this.cancelButton);
@@ -408,7 +430,7 @@
         private TextBox monitorHeightText;
         private Label monitorWidthLabel;
         private TextBox monitorWidthText;
-        private Label generalLabel;
+        private Label accountsLabel;
         private Label gamePortLabel;
         private TextBox gamePortText;
         private Label gameIPLabel;
@@ -430,5 +452,7 @@
         private TextBox inventoryRequestTimeText;
         private Label inventoryRequestTimeLabel;
         private CheckBox scanUserInventoryCheck;
+        private Label versionLabel;
+        private Label notifyLabel;
     }
 }

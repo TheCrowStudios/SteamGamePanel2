@@ -9,6 +9,7 @@ namespace SteamGamePanelLibrary
 {
     public class Sandboxie : ISandboxProgram
     {
+        public string Title { get; set; } = "Sandboxie";
         public string SandboxiePath { get; set; }
 
         public Sandboxie(string _sandboxiePath)
@@ -68,7 +69,7 @@ namespace SteamGamePanelLibrary
         }
 
         // DONE - Use threads to add time between users launching.
-        public void LaunchSteamAndLoginAccountsInSandbox(List<SteamUserModel> _accounts, string _steamLauncher)
+        public void LaunchSteamAndLoginInSandbox(List<SteamUserModel> _accounts, string _steamLauncher)
         {
             Thread thread = new Thread(() => LaunchSteamAndLoginAccountsInSandboxInThread(_accounts, _steamLauncher));
             thread.Start();
@@ -99,7 +100,7 @@ namespace SteamGamePanelLibrary
             _account.GameProcess = sandboxie;
         }
 
-        public void LaunchSteamGamesInSandbox(List<SteamUserModel> _accounts, string _steamLauncher, string _gameID, int _windowWidth, int _windowHeight, int _monitorWidth, int _monitorHeight, string? _ip, string? _port)
+        public void LaunchSteamGameInSandbox(List<SteamUserModel> _accounts, string _steamLauncher, string _gameID, int _windowWidth, int _windowHeight, int _monitorWidth, int _monitorHeight, string? _ip, string? _port)
         {
             int widthUsed = 0;
             int heightUsed = 0;
