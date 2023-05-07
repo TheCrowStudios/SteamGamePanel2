@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace SteamGamePanelLibrary
 {
@@ -13,9 +14,13 @@ namespace SteamGamePanelLibrary
         public string Password { get; set; }
         public string SharedSecret { get; set; }
         public string SteamID { get; set; }
+        [JsonIgnore]
         public string SteamInventory { get; set; }
+        [JsonIgnore]
         public string Inventory { get; set; }
+        [JsonIgnore]
         public string Status { get; set; }
+        [JsonIgnore]
         public Process GameProcess { get; set; }
 
         public SteamUserModel()

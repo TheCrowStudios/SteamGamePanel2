@@ -32,15 +32,15 @@ namespace SteamGamePanelUI
         {
             if (String.IsNullOrWhiteSpace(usernameText.Text) || String.IsNullOrWhiteSpace(passwordText.Text)) return;
 
-            if (!Config.AddSteamUser(usernameText.Text, passwordText.Text))
+            if (Config.AddSteamUser(usernameText.Text, passwordText.Text)) notifyLabel.Text = $"Added user {usernameText.Text}";
+            else
             {
-                notifyLabel.Text = "Could not add user";
+                notifyLabel.Text = $"Could not add user {usernameText.Text}";
                 return;
             }
 
             usernameText.Text = "";
             passwordText.Text = "";
-            notifyLabel.Text = "";
             UpdateUserList();
         }
 
@@ -57,16 +57,16 @@ namespace SteamGamePanelUI
         private void removeButton_Click(object sender, EventArgs e)
         {
             if (accountsList.SelectedItems.Count == 0) return;
+
+            notifyLabel.Text = "";
             
             for (int i = 0; i < accountsList.SelectedItems.Count; i++)
             {
-                Config.RemoveSteamUser(accountsList.SelectedItems[i].Text);
+                if (Config.RemoveSteamUser(accountsList.SelectedItems[i].Text)) notifyLabel.Text += $"Removed user {accountsList.SelectedItems[i].Text}\n";
+                else notifyLabel.Text += $"Could not remove user {accountsList.SelectedItems[i].Text}\n";
             }
 
-            while (accountsList.SelectedItems.Count != 0)
-            {
-                accountsList.Items.Remove(accountsList.SelectedItems[0]);
-            }
+            UpdateUserList();
         }
     }
 }

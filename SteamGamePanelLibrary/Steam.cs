@@ -17,6 +17,8 @@ namespace SteamGamePanelLibrary
         [DllImport("user32.dll")]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
 
+        public static Configuration Config { get; set; }
+
         public static void LaunchSteamAndLogin(SteamUserModel _account)
         {
             Process steam = new Process();
@@ -37,7 +39,11 @@ namespace SteamGamePanelLibrary
         {
             SteamUserModel user = (SteamUserModel)_account;
 
-            if (user.SharedSecret == null) return;
+            if (user.SharedSecret == null)
+            {
+                user.Status = "No maFile";
+                return;
+            }
 
             Process steamProcess = new Process();
             bool steamProcessFound = false;
@@ -52,12 +58,17 @@ namespace SteamGamePanelLibrary
 
                 for (int i = 0; i < steamProcesses.Length; i++)
                 {
-                    if (steamProcesses[i].MainWindowTitle.Contains("Steam Sign In") && steamProcesses[i].StartTime - user.GameProcess.StartTime < TimeSpan.FromMilliseconds(500))
+                    if (!steamProcesses[i].HasExited)
                     {
-                        steamProcess = steamProcesses[i];
-                        steamProcessFound = true;
-                        user.GameProcess = steamProcess;
-                        break;
+                        TimeSpan timeSpan = steamProcesses[i].StartTime - user.GameProcess.StartTime;
+
+                        if (steamProcesses[i].MainWindowTitle.Contains("Steam Sign In") && timeSpan < TimeSpan.FromMilliseconds(Config.ProcessLaunchSpan))
+                        {
+                            steamProcess = steamProcesses[i];
+                            steamProcessFound = true;
+                            user.GameProcess = steamProcess;
+                            break;
+                        }
                     }
                 }
 
@@ -83,18 +94,18 @@ namespace SteamGamePanelLibrary
                 steamGuardAccount.SharedSecret = user.SharedSecret;
                 string steamGuardCode = steamGuardAccount.GenerateSteamGuardCode();
                 SetForegroundWindow(steamProcess.MainWindowHandle);
-                Thread.Sleep(150);
+                Thread.Sleep(Config.TextInputDelay);
                 InputSimulator inputSimulator = new InputSimulator();
                 inputSimulator.Keyboard.TextEntry(steamGuardCode);
                 inputSimulator.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
+
+                Thread.Sleep(5000);
 
                 if (!steamProcess.MainWindowTitle.Contains("Steam Sign In"))
                 {
                     user.Status = "Steam guard entered.";
                     return;
                 }
-
-                Thread.Sleep(5000);
 
                 attempts += 1;
             }

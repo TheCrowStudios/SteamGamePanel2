@@ -50,6 +50,8 @@ namespace SteamGamePanelLibrary
 
         public static void ReloadSandboxie(string _sandboxiePath)
         {
+            if (!File.Exists(_sandboxiePath)) return;
+            
             Process sandboxie = new Process();
 
             sandboxie.StartInfo.FileName = _sandboxiePath;
@@ -66,6 +68,7 @@ namespace SteamGamePanelLibrary
             sandboxie.StartInfo.Arguments = $"/box:{_account.Username} {_steamLauncher} -login {_account.Username} {_account.Password}";
             sandboxie.Start();
             _account.GameProcess = sandboxie;
+            _account.Status = "Launching in Sandboxie";
         }
 
         // DONE - Use threads to add time between users launching.
@@ -88,6 +91,8 @@ namespace SteamGamePanelLibrary
 
         public void LaunchSteamGameInSandbox(SteamUserModel _account, string _steamLauncher, string _gameID, int _windowWidth, int _windowHeight, int _posX, int _posY, string? _ip, string? _port)
         {
+            if (!File.Exists(SandboxiePath)) return;
+            
             ReloadSandboxie(SandboxiePath);
             Process sandboxie = new Process();
 
@@ -98,6 +103,7 @@ namespace SteamGamePanelLibrary
 
             sandboxie.Start();
             _account.GameProcess = sandboxie;
+            _account.Status = "Launching in Sandboxie";
         }
 
         public void LaunchSteamGameInSandbox(List<SteamUserModel> _accounts, string _steamLauncher, string _gameID, int _windowWidth, int _windowHeight, int _monitorWidth, int _monitorHeight, string? _ip, string? _port)

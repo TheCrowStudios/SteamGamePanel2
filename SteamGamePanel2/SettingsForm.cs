@@ -25,6 +25,15 @@ namespace SteamGamePanelUI
         // TODO - Add tooltips.
         private void SettingsForm_Load(object sender, EventArgs e)
         {
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(presetCombo, "Preset for the timings. Select fast if you have a fast computer and are not experiencing issues with launching Steam.");
+            toolTip.SetToolTip(accountDelayText, "The delay in ms between each account being launched");
+            toolTip.SetToolTip(launchSpanText, "The time in ms used to identify the associated Steam process with an account.");
+            toolTip.SetToolTip(inputDelayText, "The delay in ms between text entry.");
+
+            accountDelayText.Text = Config.AccountDelay.ToString();
+            launchSpanText.Text = Config.ProcessLaunchSpan.ToString();
+            inputDelayText.Text = Config.TextInputDelay.ToString();
             steamPathText.Text = Config.SteamPath;
             inventoryRequestTimeText.Text = Config.TimeBetweenInventoryRequest.ToString();
             scanUserInventoryCheck.Checked = Config.ScanUserInventory;
@@ -42,12 +51,19 @@ namespace SteamGamePanelUI
             Themes.SetFormTheme(this);
 
             notifyLabel.Text = "";
+
+            presetCombo.Items.Add("Fast");
+            presetCombo.Items.Add("Medium");
+            presetCombo.Items.Add("Slow");
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
             int value;
 
+            if (int.TryParse(accountDelayText.Text, out value)) Config.AccountDelay = value;
+            if (int.TryParse(launchSpanText.Text, out value)) Config.ProcessLaunchSpan = value;
+            if (int.TryParse(inputDelayText.Text, out value)) Config.TextInputDelay = value;
             Config.SteamPath = steamPathText.Text;
             if (int.TryParse(inventoryRequestTimeText.Text, out value)) Config.TimeBetweenInventoryRequest = value;
             Config.ScanUserInventory = scanUserInventoryCheck.Checked;
@@ -88,6 +104,9 @@ namespace SteamGamePanelUI
             sandboxieConfigurationPathLabel.ForeColor = ForeColor;
             maFilesPathLabel.ForeColor = ForeColor;
 
+            if (!int.TryParse(accountDelayText.Text, out value)) accountDelayLabel.ForeColor = Color.Red;
+            if (!int.TryParse(launchSpanText.Text, out value)) launchSpanLabel.ForeColor = Color.Red;
+            if (!int.TryParse(inputDelayText.Text, out value)) inputDelayLabel.ForeColor = Color.Red;
             if (!int.TryParse(inventoryRequestTimeText.Text, out value)) inventoryRequestTimeLabel.ForeColor = Color.Red;
             if (!File.Exists(steamPathText.Text)) steamPathLabel.ForeColor = Color.Red;
             if (!File.Exists(sandboxiePathText.Text) && sandboxiePathText.Text != "") sandboxiePathLabel.ForeColor = Color.Red;
@@ -98,6 +117,28 @@ namespace SteamGamePanelUI
             if (!int.TryParse(gameHeightText.Text, out value)) gameHeightLabel.ForeColor = Color.Red;
             if (!int.TryParse(monitorWidthText.Text, out value)) monitorWidthLabel.ForeColor = Color.Red;
             if (!int.TryParse(monitorHeightText.Text, out value)) monitorHeightLabel.ForeColor = Color.Red;
+        }
+
+        private void presetCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (presetCombo.SelectedIndex)
+            {
+                case 0:
+                    accountDelayText.Text = "500";
+                    launchSpanText.Text = "250";
+                    inputDelayText.Text = "100";
+                    break;
+                case 1:
+                    accountDelayText.Text = "1000";
+                    launchSpanText.Text = "500";
+                    inputDelayText.Text = "150";
+                    break;
+                case 2:
+                    accountDelayText.Text = "1500";
+                    launchSpanText.Text = "750";
+                    inputDelayText.Text = "200";
+                    break;
+            }
         }
     }
 }

@@ -53,7 +53,19 @@ namespace SteamGamePanelLibrary
         public int TimeBetweenInventoryRequest { get; set; } = 60000;
         public bool ScanUserInventory { get; set; } = true;
         /// <summary>
-        /// The loaded steam accounts from the file.
+        /// The time between each account being launched.
+        /// </summary>
+        public int AccountDelay { get; set; } = 1000;
+        /// <summary>
+        /// The allowed span when finding Steam process associated to the account.
+        /// </summary>
+        public int ProcessLaunchSpan { get; set; } = 500;
+        /// <summary>
+        /// The time between text input.
+        /// </summary>
+        public int TextInputDelay { get; set; } = 150;
+        /// <summary>
+        /// The loaded Steam accounts from the file.
         /// </summary>
         public List<SteamUserModel> SteamUsers { get; set; } = new List<SteamUserModel>();
 
@@ -65,6 +77,8 @@ namespace SteamGamePanelLibrary
 
             if (File.Exists("C:\\Program Files\\Sandboxie-Plus\\Start.exe")) SandboxiePath = "C:\\Program Files\\Sandboxie-Plus\\Start.exe";
             if (File.Exists("C:\\Windows\\Sandboxie.ini")) SandboxieConfigurationPath = "C:\\Windows\\Sandboxie.ini";
+
+            Steam.Config = this;
         }
         
         /// <summary>
@@ -142,15 +156,26 @@ namespace SteamGamePanelLibrary
         /// Removes the user from the configuration, removes the user box in Sandboxie and saves the configuration.
         /// </summary>
         /// <param name="_username"></param>
-        public void RemoveSteamUser(string _username)
+        public bool RemoveSteamUser(string _username)
         {
             for (int i = 0; i < SteamUsers.Count; i++)
             {
-                if (SteamUsers[i].Username == _username) SteamUsers.RemoveAt(i);
+                if (SteamUsers[i].Username == _username)
+                {
+                    if (SteamUsers[i].GameProcess != null)
+                    {
+                        if (!SteamUsers[i].GameProcess.HasExited || SteamUsers[i].Status != "") return false;
+                    }
+
+                    SteamUsers.RemoveAt(i);
+                    break;
+                }
             }
 
             if (File.Exists(SandboxiePath)) Sandboxie.RemoveBox(_username, SandboxiePath);
             SaveConfig();
+
+            return true;
         }
 
         /// <summary>

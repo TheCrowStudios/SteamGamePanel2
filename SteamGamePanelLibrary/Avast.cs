@@ -24,6 +24,7 @@ namespace SteamGamePanelLibrary
             avast.StartInfo.Arguments = $"-login {_account.Username} {_account.Password}";
             avast.Start();
             _account.GameProcess = avast;
+            _account.Status = "Launching in Avast";
         }
 
         // DONE - Use threads to add time between users launching.
@@ -56,6 +57,7 @@ namespace SteamGamePanelLibrary
 
             avast.Start();
             _account.GameProcess = avast;
+            _account.Status = "Launching in Avast";
         }
 
         public void LaunchSteamGameInSandbox(List<SteamUserModel> _accounts, string _steamLauncher, string _gameID, int _windowWidth, int _windowHeight, int _monitorWidth, int _monitorHeight, string? _ip, string? _port)
